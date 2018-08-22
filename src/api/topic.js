@@ -77,6 +77,7 @@ export const getIndexList = async (page, limit = 10) => {
 }
 
 export const getUserTopicList = async (uid, limit = 0) => {
+    console.log('getUserTopicList', uid, limit)
     const result = await promise(Topic.getListByUser(uid, limit))
     if (result && result.count > 0) {
         const list = await dealList(result.list)

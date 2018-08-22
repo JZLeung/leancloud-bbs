@@ -41,7 +41,7 @@ export const getUserReplys = async uid => {
     if (replys.length === 0) return []
     const _topics = await Topic.getListByTopicIds(replys.map(reply => reply.get('tid')))
     const topics = {}
-    _topics.forEach(topic => {
+    _topics.list.forEach(topic => {
         topics[topic.id] = topic
     })
     return replys.map(reply => {
