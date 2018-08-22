@@ -1,0 +1,73 @@
+{
+  "name": "leancloudbbs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:dll": "webpack --config configs/dll.js --mode production",
+    "deploy" : "yarn build && git add -A && git commit -m \"deploy to gitpage\" && git subtree push --prefix=dist origin gh-pages",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "buefy": "^0.6.6",
+    "dayjs": "^1.7.5",
+    "js-cookie": "^2.2.0",
+    "leancloud-storage": "^3.10.0",
+    "markdown-it": "^8.4.2",
+    "markdown-it-emoji": "^1.4.0",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0",
+    "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-service": "^3.0.0",
+    "html-webpack-include-assets-plugin": "^1.0.4",
+    "node-sass": "^4.9.3",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^7.1.0",
+    "vue-cli-plugin-axios": "^0.0.4",
+    "vue-template-compiler": "^2.5.17",
+    "webpack-command": "^0.4.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1,
+          "flatTernaryExpressions": true
+        }
+      ],
+      "no-console": [
+        0
+      ]
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
