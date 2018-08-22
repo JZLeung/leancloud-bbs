@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:dll": "webpack --config configs/dll.js --mode production",
-    "deploy" : "./deploy.sh",
+    "deploy": "./deploy.sh",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -16,7 +16,9 @@
     "js-cookie": "^2.2.0",
     "leancloud-storage": "^3.10.0",
     "markdown-it": "^8.4.2",
+    "markdown-it-checkbox": "^1.1.0",
     "markdown-it-emoji": "^1.4.0",
+    "markdown-it-task-lists": "^2.1.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
