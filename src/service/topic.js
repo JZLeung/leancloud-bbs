@@ -1,5 +1,5 @@
 import db from '@/plugins/leancloud'
-import * as User from './user'
+// import * as User from './user'
 
 const Topic = db.Object.extend('topic')
 
@@ -17,8 +17,8 @@ export const detail = async id => {
     const query = new db.Query('topic')
     const detail = await query.get(id)
     if (detail) {
-        const author = await User.getOne(detail.get('uid'))
-        detail.set('username', author.get('username'))
+        // const author = await User.getOne(detail.get('uid'))
+        // detail.set('username', author.get('username'))
         return detail
     } else {
         return {}

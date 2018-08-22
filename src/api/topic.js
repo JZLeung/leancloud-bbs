@@ -1,6 +1,6 @@
 // import * as User from '@/service/user'
 import * as Topic from '@/service/topic'
-import * as User from '@/service/user'
+// import * as User from '@/service/user'
 import promise from './errorHandler'
 
 import dayjs from 'dayjs'
@@ -13,28 +13,28 @@ export const postNew = async topic => {
     return promise(Topic.postNew(topic))
 }
 
-const dealDetail = (detail, users) => {
-    const user = users[detail.get('uid')] || {
-        get() {}
-    }
+const dealDetail = (detail) => {
+    // const user = users[detail.get('uid')] || {
+    //     get() {}
+    // }
     return {
         id: detail.id,
         title: detail.get('title'),
         content: md.render(detail.get('content')),
-        username: user.get('username'),
+        username: detail.get('username'),
         uid: detail.get('uid'),
         created_at: dayjs(detail.createdAt).format('YYYY-MM-DD HH:mm')
     }
 }
 
 const dealList = async list => {
-    const _users = await User.getUsersByUids(list.map(one => one.get('uid')))
-    const users = {}
-    _users.forEach(user => {
-        users[user.id] = user
-    })
+    // const _users = await User.getUsersByUids(list.map(one => one.get('uid')))
+    // const users = {}
+    // _users.forEach(user => {
+    //     users[user.id] = user
+    // })
     // console.log(_users, users, list.map(one => one.get('uid')))
-    return list.map(one => dealDetail(one, users))
+    return list.map(one => dealDetail(one))
 }
 
 export const getDetail = async id => {
