@@ -32,8 +32,8 @@ export const getReplys = async topicId => {
     })
 }
 
-export const postNew = async (topicId, content) => {
-    return promise(Reply.postNew(topicId, content))
+export const postNew = async (topic, content) => {
+    return promise(Reply.postNew(topic, content))
 }
 
 export const getUserReplys = async uid => {

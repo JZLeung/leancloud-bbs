@@ -93,7 +93,7 @@ export default {
             const res = this.check()
             if (res) {
                 this.$store.dispatch('app/setLoading', true)
-                const postRes = await postNew(this.id, this.form.content)
+                const postRes = await postNew(this.detail, this.form.content)
                 if (postRes) {
                     this.form.content = ''
                     this.$toast.open({

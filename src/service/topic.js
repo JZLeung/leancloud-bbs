@@ -10,6 +10,7 @@ export const postNew = (topic) => {
     newTopic.set('content', topic.content)
     newTopic.set('title', topic.title)
     newTopic.set('uid', user.id)
+    newTopic.set('username', user.get('username'))
     return newTopic.save()
 }
 
