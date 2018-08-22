@@ -14,12 +14,10 @@
 </template>
 
 <script>
-import {postNew, getDetail} from '@/api/topic'
-import {isLogin} from '@/api/user'
+import {postNew} from '@/api/topic'
 import {INPUT_TYPES} from '@/plugins/consts'
 export default {
     data: () => ({
-        id: '',
         form: {
             title: '',
             content: ''
@@ -68,7 +66,7 @@ export default {
                 return false
             }
 
-            postNew(this.form, this.id).then(topic => {
+            postNew(this.form).then(topic => {
                 console.log(topic)
                 const id = topic.id
                 this.$router.replace({
@@ -80,29 +78,6 @@ export default {
             }).catch(err => {
                 console.error('postNew error:', err)
             })
-        }
-    },
-    async mounted() {
-        if (this.$route.params.tid) {
-            const tid = this.$route.params.tid
-            const detail = await getDetail(tid, false)
-            const current = isLogin()
-            if (detail.uid !== current.id) {
-                this.$toast.open({
-                    message: '无权访问',
-                    type: 'is-danger'
-                })
-                this.$router.replace({
-                    name: 'topicDetail',
-                    params: {
-                        id: tid
-                    }
-                })
-            } else {
-                this.form.content = detail.content
-                this.form.title = detail.title
-                this.id = tid
-            }
         }
     }
 }

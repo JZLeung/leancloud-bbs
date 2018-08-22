@@ -6,41 +6,41 @@ import promise from './errorHandler'
 import dayjs from 'dayjs'
 import md from '@/plugins/markdown'
 
-export const postNew = async topic => {
+export const postNew = async (topic, topicId = false) => {
     // const user = await User.isLogin()
     // // console.log(user)
     // if (!user) return Promise.reject(false)
-    return promise(Topic.postNew(topic))
+    return promise(Topic.postNew(topic, topicId))
 }
 
-const dealDetail = (detail) => {
+const dealDetail = (detail, mdrender = true) => {
     // const user = users[detail.get('uid')] || {
     //     get() {}
     // }
     return {
         id: detail.id,
         title: detail.get('title'),
-        content: md.render(detail.get('content')),
+        content: mdrender ? md.render(detail.get('content')) : detail.get('content'),
         username: detail.get('username'),
         uid: detail.get('uid'),
         created_at: dayjs(detail.createdAt).format('YYYY-MM-DD HH:mm')
     }
 }
 
-const dealList = async list => {
+const dealList = async (list, mdrender = true) => {
     // const _users = await User.getUsersByUids(list.map(one => one.get('uid')))
     // const users = {}
     // _users.forEach(user => {
     //     users[user.id] = user
     // })
     // console.log(_users, users, list.map(one => one.get('uid')))
-    return list.map(one => dealDetail(one))
+    return list.map(one => dealDetail(one, mdrender))
 }
 
-export const getDetail = async id => {
+export const getDetail = async (id, mdrender = true) => {
     const detailObj = await promise(Topic.detail(id))
     if (detailObj) {
-        const one = await dealList([detailObj])
+        const one = await dealList([detailObj], mdrender)
         return one[0]
     } else {
         return null
