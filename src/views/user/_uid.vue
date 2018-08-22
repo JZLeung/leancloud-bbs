@@ -41,16 +41,18 @@ export default {
     }),
     methods: {
         async init() {
+            this.$store.dispatch('app/setLoading', true)
             const user = await getUserById(this.uid)
             console.log(user)
             this.$set(this.user, 'info', user)
             const topics = await getUserTopicList(this.uid, 5)
             console.log(topics)
-            this.$set(this.user, 'topics', topics)
+            this.$set(this.user, 'topics', topics.list)
 
             const replys = await getUserReplys(this.uid)
             console.log(replys)
             this.$set(this.user, 'replys', replys)
+            this.$store.dispatch('app/setLoading', false)
         }
     },
     mounted() {

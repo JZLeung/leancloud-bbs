@@ -23,12 +23,14 @@ export const getListByUserId = async uid => {
     }
 }
 
-export const postNew = (topicId, content) => {
+export const postNew = (topic, content) => {
     const user = db.User.current()
     if (!user) return Promise.reject({code: 4112})
     const newReply = new Reply()
     newReply.set('content', content)
-    newReply.set('tid', topicId)
+    newReply.set('tid', topic.id)
     newReply.set('uid', user.id)
+    newReply.set('username', user.get('username'))
+    newReply.set('title', topic.title)
     return newReply.save()
 }

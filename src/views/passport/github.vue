@@ -1,7 +1,8 @@
 <template lang="pug">
 section.login-page.main-body.container
-    a.button(:href='href')
+    a.button.is-light.is-large.is-fullwidth(:href='href')
         b-icon(icon='github-circle')
+        span 通过 Github 登录
 </template>
 
 <script>

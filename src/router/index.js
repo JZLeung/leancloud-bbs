@@ -24,6 +24,14 @@ const router = new Router({
             component: () => import(/* webpackChunkName: "topicNew" */ '@/views/topic/new.vue')
         },
         {
+            path: '/topic/edit/:tid',
+            name: 'topicEdit',
+            meta: {
+                userAuth: 1
+            },
+            component: () => import(/* webpackChunkName: "topicEdit" */ '@/views/topic/new.vue')
+        },
+        {
             path: '/topic/:id',
             name: 'topicDetail',
             component: () => import(/* webpackChunkName: "topicDetail" */ '@/views/topic/detail.vue')
