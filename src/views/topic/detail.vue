@@ -7,7 +7,8 @@
         span {{detail.created_at}}
 
     .content(v-html='detail.content')
-
+    p
+        router-link.button.is-small.is-warning(v-if='detail.self', :to='{name: "topicEdit", params: {tid: detail.id}}') 编辑
     .divider
     .container
         h4.title.is-4 共 {{replys.length}} 条评论

@@ -1,6 +1,6 @@
 // import * as User from '@/service/user'
 import * as Topic from '@/service/topic'
-// import * as User from '@/service/user'
+import * as User from '@/service/user'
 import promise from './errorHandler'
 
 import dayjs from 'dayjs'
@@ -41,7 +41,10 @@ export const getDetail = async (id, mdrender = true) => {
     const detailObj = await promise(Topic.detail(id))
     if (detailObj) {
         const one = await dealList([detailObj], mdrender)
-        return one[0]
+        const detail = one[0]
+        const user = User.isLogin()
+        detail.self = user.id === detail.uid
+        return detail
     } else {
         return null
     }
