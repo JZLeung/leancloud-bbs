@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:dll": "webpack --config configs/dll.js --mode production",
-    "deploy" : "yarn build && git add -A && git commit -m \"deploy to gitpage\" && git subtree push --prefix=dist origin gh-pages",
+    "deploy" : "./deploy.sh",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
