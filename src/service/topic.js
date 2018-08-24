@@ -1,24 +1,32 @@
 import db from '@/plugins/leancloud'
-import * as User from './user'
+// import * as User from './user'
 
 const Topic = db.Object.extend('topic')
 
-export const postNew = (topic) => {
+export const postNew = async (topic, topicId) => {
     const user = db.User.current()
     if (!user) return Promise.reject({code: 4112})
-    const newTopic = new Topic()
-    newTopic.set('content', topic.content)
-    newTopic.set('title', topic.title)
-    newTopic.set('uid', user.id)
-    return newTopic.save()
+    if (topicId) {
+        const topicInstance = await db.Object.createWithoutData('topic', topicId)
+        topicInstance.set('content', topic.content)
+        topicInstance.set('title', topic.title)
+        return topicInstance.save()
+    } else {
+        const newTopic = new Topic()
+        newTopic.set('content', topic.content)
+        newTopic.set('title', topic.title)
+        newTopic.set('uid', user.id)
+        newTopic.set('username', user.get('username'))
+        return newTopic.save()
+    }
 }
 
 export const detail = async id => {
     const query = new db.Query('topic')
     const detail = await query.get(id)
     if (detail) {
-        const author = await User.getOne(detail.get('uid'))
-        detail.set('username', author.get('username'))
+        // const author = await User.getOne(detail.get('uid'))
+        // detail.set('username', author.get('username'))
         return detail
     } else {
         return {}
