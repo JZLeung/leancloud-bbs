@@ -45,7 +45,7 @@ export const github = async userInfos => {
 
 export const getUsersByUids = (uids = []) => {
     const query = new db.Query('_User')
-    return query.containsAll('objectId', uids).find()
+    return query.containedIn('objectId', uids).find()
 }
 
 export const getOne = id => {
